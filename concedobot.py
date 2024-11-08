@@ -10,6 +10,7 @@ import discord
 import requests
 import os, threading, time, random, io, base64, json
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
@@ -41,7 +42,9 @@ class BotChannelData(): #key will be the channel ID
 
 # bot storage
 bot_data = {} # a dict of all channels, each containing BotChannelData as value and channelid as key
-wi_db = {}
+# Load the JSON file
+with open("wi_db.json", "r") as f:
+    wi_db = json.load(f)
 
 def export_config():
     wls = []
