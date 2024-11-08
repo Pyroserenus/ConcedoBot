@@ -24,6 +24,9 @@ busy = threading.Lock() # a global flag, never handle more than 1 request at a t
 submit_endpoint = os.getenv("KAI_ENDPOINT") + "/api/v1/generate"
 imggen_endpoint = os.getenv("KAI_ENDPOINT") + "/sdapi/v1/txt2img"
 admin_name = os.getenv("ADMIN_NAME")
+header_template = os.getenv("HEADER_TEMPLATE")
+msg_suffix = os.getenv("SUFFIX_TEMPLATE")
+stop_template = os.getenv("STOP_TEMPLATE")
 maxlen = 300
 
 class BotChannelData(): #key will be the channel ID
@@ -77,9 +80,10 @@ def concat_history(channelid):
     global bot_data
     currchannel = bot_data[channelid]
     prompt = ""
+    header2 = header_template.format(author=client.user.display_name)
     for msg in currchannel.chat_history:
-        prompt += "### " + msg + "\n"
-    prompt += "### " + client.user.display_name + ":\n"
+        prompt += msg_suffix + msg
+    prompt += msg_suffix + header2 + client.user.display_name + ": "
     return prompt
 
 def prepare_wi(channelid):
@@ -104,7 +108,8 @@ def append_history(channelid,author,text):
     currchannel = bot_data[channelid]
     if len(text) > 1000: #each message is limited to 1k chars
         text = text[:1000] + "..."
-    msgstr = f"{author}:\n{text}"
+    header = header_template.format(author=author)
+    msgstr = f"{header}{author}: {text}"
     currchannel.chat_history.append(msgstr)
     print(f"{channelid} msg {msgstr}")
 
@@ -182,8 +187,8 @@ def prepare_payload(channelid):
     "quiet": True,
     "trim_stop": True,
     "stop_sequence": [
-        "\n###",
-        "### "
+        "</s>",
+        stop_template
     ],
     "use_default_badwordsids": False
     }
