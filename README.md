@@ -4,7 +4,8 @@ A very simple Discord bot intended for KoboldCpp
 To Use:
 - Clone repo
 - pip install -r requirements.txt
-- create a new `.env` file based on `template.env`, fill in your credentials and endpoint. That file MUST be named `.env`
+- create a new `.env` file based on the `template.env` that best corresponds with the intended model, fill in your credentials and endpoint. That file MUST be named `.env`
+- (optional) Edit basememory.txt with character personality details. Edit intromemory.txt with character greeting details. Edit wi_db.json with World Info database entries.
 - python3 concedobot.py
 
 Then invite the bot into your discord server, and enable it on all desired channels with `/botwhitelist @YourBotName` in each channel.
