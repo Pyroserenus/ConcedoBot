@@ -160,7 +160,11 @@ def prepare_payload(channelid):
         basememory_template = file.read()
 
     basememory = basememory_template.replace("{bot}", client_user_display_name)
-    intromemory = f"\n### {client.user.display_name}:\nQuite well met, Sire. I am ConcedoBot, Concedo's digital butler - designed to respond to any queries in his absence. Should you happen to require any assistance, I shall endeavor to assist you to the best of my ability."
+    
+    with open("intromemory.txt", "r") as file:
+        intromemory_template = file.read()
+
+    intromemory = intromemory_template.replace("{bot}", client_user_display_name)
 
     memory = basememory
     # inject world info here
