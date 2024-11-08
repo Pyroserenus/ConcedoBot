@@ -1,0 +1,4 @@
+{
+    "1st entry,1stentry": "1stentry=This is an example entry, this text will be added to context if either Kilimanjaro or Eyjafjallajokull are mentioned. Any number of keywords can be used. separate each keyword with a comma",
+    "2ndEntry": "2ndEntry=Any number of entries can be added to this JSON, remember to include a comma after the quote on all entries except the last"
+}
