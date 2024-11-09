@@ -28,6 +28,7 @@ admin_name = os.getenv("ADMIN_NAME")
 header_template = os.getenv("HEADER_TEMPLATE")
 msg_suffix = os.getenv("SUFFIX_TEMPLATE")
 stop_template = os.getenv("STOP_TEMPLATE")
+system_template = os.getenv("SYSTEM_TEMPLATE")
 maxlen = 300
 
 class BotChannelData(): #key will be the channel ID
@@ -159,7 +160,7 @@ def prepare_payload(channelid):
     with open("basememory.txt", "r") as file:
         basememory_template = file.read()
 
-    basememory = basememory_template.replace("{bot}", client_user_display_name)
+    basememory = system_template + basememory_template.replace("{bot}", client_user_display_name)
     
     with open("intromemory.txt", "r") as file:
         intromemory_template = file.read()
